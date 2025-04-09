@@ -1,0 +1,11 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MidasGtsExporter/.vs/MidasGtsExporter/v15
+/MidasGtsExporter/MidasGtsExporter/obj/Debug
+/MidasGtsExporter/MidasGtsExporter/bin/Debug
+/MidasGtsExporter/MidasGtsExporter/obj
+/MidasGtsExporter/MidasGtsExporter/bin
+/TestData/MidasGts/GtsModel_Coarse_Mesh.f3grid
+/TestData/MidasGts/GtsModel_Coarse_Geom.geom
