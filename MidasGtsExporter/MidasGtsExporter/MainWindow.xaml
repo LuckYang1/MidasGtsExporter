@@ -1,0 +1,101 @@
+<Window
+	x:Class="MidasGtsExporter.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:MidasGtsExporter"
+	Height="450" Width="600"
+	Title="Midas GTS Exporter"
+	WindowStartupLocation="CenterScreen"
+	Loaded="MainWindow_OnLoaded">
+	<Grid Margin="5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Margin="5">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<TextBlock Grid.Row="0" Grid.Column="0" Text="Midas FPN文件路径：" Margin="3" />
+			<TextBox x:Name="TextBoxInputFilePath" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="3" />
+			<Button Content="..." Grid.Row="0" Grid.Column="2" ToolTip="打开文件夹选择对话框" Click="ButtonInputFilePath_OnClick" Margin="3" Padding="5,0" />
+
+			<TextBlock Grid.Row="1" Grid.Column="0" Text="输出文件目录：" Margin="3" />
+			<TextBox x:Name="TextBoxOutputFolder" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="3" />
+			<Button Content="..." Grid.Row="1" Grid.Column="2" ToolTip="打开文件夹选择对话框" Click="ButtonOutputFolder_OnClick" Margin="3" Padding="5,0" />
+
+			<TextBlock Grid.Row="2" Grid.Column="0" Text="输出文件名：" Margin="3" />
+			<Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<TextBox x:Name="TextBoxOutputFileName" IsReadOnly="True" Margin="3"
+				         TextChanged="TextBoxOutputFileName_OnTextChanged" />
+				<CheckBox x:Name="CheckBoxSameFileName" Content="与输入FPN文件同名" IsChecked="True"
+				          Checked="CheckBoxSameFileName_OnChecked" Unchecked="CheckBoxSameFileName_OnChecked"
+				          Grid.Column="1" Margin="5,3" VerticalAlignment="Center" />
+				<Button Content="..." ToolTip="打开输出文件目录" Click="ButtonOpenOutputFolder_OnClick" Grid.Column="2" Margin="3" Padding="5,0" />
+			</Grid>
+		</Grid>
+
+		<Grid Grid.Row="1" Margin="5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Grid Margin="2">
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<TextBox x:Name="TextBoxOutputMessage" Grid.Column="0" Grid.ColumnSpan="3" IsReadOnly="True" Margin="0,5"
+				         VerticalScrollBarVisibility="Auto" />
+				<Button Click="ButtonAbout_OnClick" Content="关于..." Grid.Row="1" Grid.Column="0" Padding="5,1" />
+				<TextBlock x:Name="TextBlockTime" Grid.Row="1" Grid.Column="1" Text="00:00:00" Margin="8,0,8,0" />
+				<ProgressBar x:Name="ProgressBarConvert" Grid.Row="1" Grid.Column="2" Minimum="0" Maximum="100" />
+			</Grid>
+			<Grid Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<GroupBox Header="输出格式" Margin="5">
+					<StackPanel Margin="5">
+						<RadioButton x:Name="RadioButtonFlac3D" Content="FLAC3D"
+						             Checked="RadioButtonOutputFormat_OnChecked" />
+						<RadioButton x:Name="RadioButtonAbaqus" Content="ABAQUS"
+						             Checked="RadioButtonOutputFormat_OnChecked" />
+						<RadioButton x:Name="RadioButtonLsDyna" Content="LS-DYNA"
+						             Checked="RadioButtonOutputFormat_OnChecked" />
+					</StackPanel>
+				</GroupBox>
+				<StackPanel Grid.Row="1">
+					<local:LsDynaOption x:Name="LsDynaOption" Visibility="Collapsed" />
+					<local:AbaqusOption x:Name="AbaqusOption" Visibility="Collapsed" />
+					<local:Flac3dOption x:Name="Flac3dOption" />
+				</StackPanel>
+				<Button x:Name="ButtonConvert" Grid.Row="2" Content="开始转换" Height="60" Margin="5"
+				        Click="ButtonConvert_OnClick" />
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>
